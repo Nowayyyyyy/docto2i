@@ -26,14 +26,20 @@ public class interfacedocto extends JFrame {
 
                     String enteredUsername = textField1.getText();
                     char[] enteredPasswordChars = passwordField1.getPassword();
-                    String enteredPassword = new String(enteredPasswordChars);
+                    String enteredPassword1 = new String(enteredPasswordChars);
+                    char[] enteredPasswordChars2 = passwordField1.getPassword();
+                    String enteredPassword2 = new String(enteredPasswordChars2);
 
-                    if (!(textField1.getText().equals("x"))  || !(enteredPassword.equals("x"))) {
+                    if ((!(textField1.getText().equals("x"))  || !(enteredPassword1.equals("x"))) && ( !(textField1.getText().equals("y")) || !(enteredPassword2.equals("y"))))  {
                         JOptionPane.showMessageDialog(LOGINButton, "Identifiant ou mot de passe incorrect ");
                     }
-                    if ((textField1.getText().equals("x")) && (enteredPassword.equals("x"))) {
+                    if ((textField1.getText().equals("x")) && (enteredPassword1.equals("x"))) {
                         dispose();
                         PageCadre pageCadre = new PageCadre();
+                    }
+                    if ((textField1.getText().equals("y")) && (enteredPassword1.equals("y"))) {
+                        dispose();
+                        EDT1med page1Med = new EDT1med();
                     }
                 }
             });
