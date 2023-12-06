@@ -1,7 +1,8 @@
 package modele;
 
 import jakarta.persistence.*;
-
+@NamedQuery(name="findSalaryForNameAndDepartment",
+        query="SELECT c.login, c.mdp FROM Cadre c ")
 @Entity
 public class Cadre extends Personne  {
 

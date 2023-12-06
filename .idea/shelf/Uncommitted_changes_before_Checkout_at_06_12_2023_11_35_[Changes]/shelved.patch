@@ -1,0 +1,70 @@
+Index: src/main/java/modele/Cadre.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package modele;\n\nimport jakarta.persistence.*;\n\n@Entity\npublic class Cadre extends Personne  {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"CADRENO\")\n    private int id;\n\n\n    @Column(name = \"login\",\n            unique = true,\n            nullable = true,\n            length = 255)\n    //columnDefinition = \"VARCHAR(255) default 'INCONNU'\")\n    private String login;\n\n    @Column(\n            unique = true,\n            nullable = true,\n            length = 255)\n            //columnDefinition = \"VARCHAR(255) default 'INCONNU'\")\n    private String mdp;\n\n    public Cadre(){\n        super(\"INCONNU\", \"INCONNU\",\"INCONNU\",\"INCONNU\");\n        this.login = \"INCONNU\";\n        this.mdp = \"INCONNU\";\n    }\n\n    public Cadre(String nom, String prenom, String dateNaissance,String adresse, String login, String mdp){\n        super(nom, prenom,dateNaissance, adresse);\n        this.login = login;\n        this.mdp = mdp;\n    }\n\n    /*public int getId() {\n        return id;\n    }\n\n    public void setId(int id) {\n        this.id = id;\n    }*/\n\n    public String getLogin() {\n        return login;\n    }\n\n    public void setMdp(String mdp){\n        this.mdp =mdp;\n    }\n\n    @Override\n    public String toString() {\n        return super.toString();\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/modele/Cadre.java b/src/main/java/modele/Cadre.java
+--- a/src/main/java/modele/Cadre.java	(revision 4c51ae3a8efed77bd807c772e346d9d921d3af20)
++++ b/src/main/java/modele/Cadre.java	(date 1701858947803)
+@@ -2,6 +2,8 @@
+ 
+ import jakarta.persistence.*;
+ 
++
++
+ @Entity
+ public class Cadre extends Personne  {
+ 
+Index: src/main/java/modele/RDVaFaire.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package modele;\n\nimport jakarta.persistence.*;\n\nimport java.util.Date;\n\n@Entity\npublic class RDVaFaire {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"RDVNO\")\n    private int id;\n\n\n    @ManyToOne\n    @JoinColumn(name = \"patient_id\")\n    private Patient unPatient ;\n\n    @ManyToOne\n    @JoinColumn(name = \"medecin_id\")\n    private Medecin unMedecin;\n\n    @ManyToOne\n    @JoinColumn(name = \"creneauDispo_id\")\n    private CreneauHoraireDispo unCreneau;\n    @ManyToOne\n    @JoinColumn(name = \"salle_id\")\n    private  SalleDispo uneSalle;\n\n    @Column(name = \"dateRDV\",\n            unique = true,\n            nullable = true)\n\n    private String dateRDV;\n\n    public RDVaFaire(Patient unPatient, Medecin unMedecin, CreneauHoraireDispo unCreneau, SalleDispo uneSalle,String dateRDV) {\n        this.unPatient = unPatient;\n        this.unMedecin = unMedecin;\n        this.unCreneau = unCreneau;\n        this.uneSalle = uneSalle;\n        this.dateRDV =dateRDV;\n    }\n\n    public RDVaFaire() {\n\n    }\n\n    public Patient getUnPatient() {\n        return unPatient;\n    }\n\n    public void setUnPatient(Patient unPatient) {\n        this.unPatient = unPatient;\n    }\n\n    public Medecin getUnMedecin() {\n        return unMedecin;\n    }\n\n    public void setUnMedecin(Medecin unMedecin) {\n        this.unMedecin = unMedecin;\n    }\n\n    public CreneauHoraireDispo getUnCreneau() {\n        return unCreneau;\n    }\n\n    public void setUnCreneau(CreneauHoraireDispo unCreneau) {\n        this.unCreneau = unCreneau;\n    }\n\n    public SalleDispo getUneSalle() {\n        return uneSalle;\n    }\n\n    public void setUneSalle(SalleDispo uneSalle) {\n        this.uneSalle = uneSalle;\n    }\n\n    @Override\n    public String toString() {\n        return \"RDVaFaire{\" +\n                \"id=\" + id +\n                \", unPatient=\" + unPatient +\n                \", unMedecin=\" + unMedecin +\n                \", unCreneau=\" + unCreneau +\n                \", uneSalle=\" + uneSalle +\n                '}';\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/modele/RDVaFaire.java b/src/main/java/modele/RDVaFaire.java
+--- a/src/main/java/modele/RDVaFaire.java	(revision 4c51ae3a8efed77bd807c772e346d9d921d3af20)
++++ b/src/main/java/modele/RDVaFaire.java	(date 1701858175415)
+@@ -2,7 +2,6 @@
+ 
+ import jakarta.persistence.*;
+ 
+-import java.util.Date;
+ 
+ @Entity
+ public class RDVaFaire {
+Index: src/main/java/modele/Requetes.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/modele/Requetes.java b/src/main/java/modele/Requetes.java
+new file mode 100644
+--- /dev/null	(date 1701858771603)
++++ b/src/main/java/modele/Requetes.java	(date 1701858771603)
+@@ -0,0 +1,23 @@
++package modele;
++
++import jakarta.persistence.EntityManager;
++import jakarta.persistence.EntityManagerFactory;
++import jakarta.persistence.Persistence;
++
++import javax.management.Query;
++import java.util.List;
++
++public class Requetes {
++
++    final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hopital2iPU");
++    final EntityManager em = emf.createEntityManager();
++    public Requetes(){
++
++    }
++
++    public  void test(){
++        final String strQuery= "SELECT p.login, p.mdp FROM Cadre p";
++        Query query = (Query) em.createQuery(strQuery);
++        //List<Personne> identification = query.getResultList();
++    }
++}
