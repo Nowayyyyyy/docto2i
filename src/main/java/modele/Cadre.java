@@ -1,7 +1,8 @@
 package modele;
 
 import jakarta.persistence.*;
-@NamedQuery(name="findSalaryForNameAndDepartment",
+
+@NamedQuery(name="identification",
         query="SELECT c.login, c.mdp FROM Cadre c ")
 @Entity
 public class Cadre extends Personne  {
@@ -26,6 +27,8 @@ public class Cadre extends Personne  {
             //columnDefinition = "VARCHAR(255) default 'INCONNU'")
     private String mdp;
 
+
+
     public Cadre(){
         super("INCONNU", "INCONNU","INCONNU","INCONNU");
         this.login = "INCONNU";
@@ -36,6 +39,14 @@ public class Cadre extends Personne  {
         super(nom, prenom,dateNaissance, adresse);
         this.login = login;
         this.mdp = mdp;
+    }
+
+
+
+    public void test(){
+       // Query query = em.createNamedQuery("identification");
+
+
     }
 
     /*public int getId() {
